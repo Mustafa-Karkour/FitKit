@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id'kotlin-android-extensions'
+    id 'com.chaquo.python'
 }
 
 android {
@@ -14,6 +15,21 @@ android {
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+        python {
+            buildPython "C:/Users/Mustafa/AppData/Local/Programs/Python/Python37/python.exe"
+            pip{
+                install "opencv-python"
+                install "numpy"
+            }
+        }
+        sourceSets {
+            main {
+                python.srcDir "src/main/python"
+            }
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
