@@ -19,12 +19,12 @@
         android:id="@+id/shoes_RV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clipToPadding="false"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:clipToPadding="false"
-        tools:listitem="@layout/shoe_item"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/kivi_WebView"
+        tools:listitem="@layout/shoe_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

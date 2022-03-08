@@ -5,6 +5,7 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -36,6 +37,15 @@ class FootActivity : AppCompatActivity() {
         ActivityResultCallback {
             var inputStream = contentResolver.openInputStream(it)
             var bitmap = BitmapFactory.decodeStream(inputStream)
+
+            if(bitmap.height < bitmap.width){
+                //Image is horizontal
+                var matrix = Matrix()
+                matrix.postRotate(90F)
+                bitmap = Bitmap.createBitmap(bitmap,0,0,bitmap.width,bitmap.height,matrix,true)
+
+            }
+
             foot_iv.setImageBitmap(bitmap)
 
 
