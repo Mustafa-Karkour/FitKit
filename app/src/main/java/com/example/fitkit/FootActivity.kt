@@ -31,6 +31,7 @@ class FootActivity : AppCompatActivity() {
     val getImgCam = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         val bitmap = it?.data?.extras?.get("data") as Bitmap
         foot_iv.setImageBitmap(bitmap)
+        //TODO: add foot measurement func
     }
 
     val getImgGal = registerForActivityResult(ActivityResultContracts.GetContent(),
@@ -57,7 +58,7 @@ class FootActivity : AppCompatActivity() {
 
             val fileAbsPath = getImageAbsPath(bitmap)
             var obj = pyObj.callAttr("main",fileAbsPath) //(method name, argument input (img_path))
-            foot_length_tv.text = obj.toString() + " cm" //return value
+            foot_length_tv.text = "Foot length: "+obj.toString() + " cm" //return value
         })
 
     fun getImageAbsPath(bitmap:Bitmap): String {
@@ -84,7 +85,7 @@ class FootActivity : AppCompatActivity() {
         if(intent.resolveActivity(packageManager) != null)
             getImgCam.launch(intent)
 
-        //TODO: add foot measurement func
+
 
     }
 
