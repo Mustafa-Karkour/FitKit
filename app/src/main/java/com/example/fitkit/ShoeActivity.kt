@@ -2,7 +2,7 @@ package com.example.fitkit
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.webkit.WebViewClient
+import android.webkit.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_shoe.*
@@ -12,9 +12,11 @@ class ShoeActivity : AppCompatActivity(), ShoeAdapter.onShoeItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shoe)
-        supportActionBar?.hide()
+//        supportActionBar?.hide()
 
+//        kivi_WebView.webViewClient = WebViewClient()
         kivi_WebView.settings.javaScriptEnabled = true
+
 
         //Hard-coded values
         val item = ShoeModel(R.drawable.nike,
@@ -31,11 +33,11 @@ class ShoeActivity : AppCompatActivity(), ShoeAdapter.onShoeItemClickListener {
         list.add(item)
         list.add(item2)
 
-        kivi_WebView.webViewClient = WebViewClient()
-        kivi_WebView.loadUrl(list.get(0).kiviLink) //selected by default
+//        kivi_WebView.loadUrl(list.get(0).kiviLink) //selected by default
 
 
         shoes_RV.adapter = ShoeAdapter(list,this)
+//        shoes_RV.layoutManager = GridLayoutManager(this,2)
         shoes_RV.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL,false)
 
         shoes_RV.setHasFixedSize(true) //for optimization purposes
