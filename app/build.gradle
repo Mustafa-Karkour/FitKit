@@ -51,6 +51,7 @@ android {
 }
 
 dependencies {
+    // Random change
     // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:29.1.0')
 
