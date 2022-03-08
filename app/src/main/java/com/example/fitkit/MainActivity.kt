@@ -11,6 +11,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+    fun toProductsActivity(view: View){
+        val intent = Intent(this, ProductDisplay::class.java)
+        startActivity(intent)
+    }
+
     fun toShoeActivity(view: View){
         val intent = Intent(this, ShoeActivity::class.java)
         startActivity(intent)
