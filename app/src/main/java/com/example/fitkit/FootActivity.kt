@@ -20,18 +20,38 @@ import java.io.*
 import java.util.*
 
 class FootActivity : AppCompatActivity() {
+    //modified shoe size table, taken from https://www.candefashions.com/about/shoe-size-conversion-chart/
+    val footToEUShoeSize = mapOf("23" to "39","24" to "39","25" to "41","26" to "42",
+        "27" to "43-44","28" to "44-45","29" to "46-47","30" to "47-48",
+        "31" to "48-49")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_foot)
 
 
-
     }
 
     val getImgCam = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-        val bitmap = it?.data?.extras?.get("data") as Bitmap
+        var bitmap = it?.data?.extras?.get("data") as Bitmap
+        if(bitmap.height < bitmap.width){
+            //Image is horizontal
+            var matrix = Matrix()
+            matrix.postRotate(90F)
+            bitmap = Bitmap.createBitmap(bitmap,0,0,bitmap.width,bitmap.height,matrix,true)
+
+        }
         foot_iv.setImageBitmap(bitmap)
-        //TODO: add foot measurement func
+        if(!Python.isStarted())
+            Python.start(AndroidPlatform(this))
+        var py = Python.getInstance()
+        var pyObj  = py.getModule("measure") //python Script name
+
+        val fileAbsPath = getImageAbsPath(bitmap)
+        var obj = pyObj.callAttr("main",fileAbsPath) //(method name, argument input (img_path))
+        var footLength : String = obj.toString() //return value
+        foot_length_tv.text = "Estimated Foot length: "+footLength + " cm"
+        shoe_size_tv.text = "Recommended shoe size: "+footToEUShoeSize[footLength.substring(0,footLength.indexOf("."))] //rounding the foot length down
     }
 
     val getImgGal = registerForActivityResult(ActivityResultContracts.GetContent(),
@@ -58,7 +78,9 @@ class FootActivity : AppCompatActivity() {
 
             val fileAbsPath = getImageAbsPath(bitmap)
             var obj = pyObj.callAttr("main",fileAbsPath) //(method name, argument input (img_path))
-            foot_length_tv.text = "Foot length: "+obj.toString() + " cm" //return value
+            var footLength : String = obj.toString() //return value
+            foot_length_tv.text = "Estimated Foot length: "+footLength + " cm"
+            shoe_size_tv.text = "Recommended shoe size: "+footToEUShoeSize[footLength.substring(0,footLength.indexOf("."))] //rounding the foot length down
         })
 
     fun getImageAbsPath(bitmap:Bitmap): String {
@@ -84,8 +106,6 @@ class FootActivity : AppCompatActivity() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if(intent.resolveActivity(packageManager) != null)
             getImgCam.launch(intent)
-
-
 
     }
 
