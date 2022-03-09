@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#464D83"
     tools:context=".FootActivity">
-
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -60,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Foot Length"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -69,6 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Recommended Shoe"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/foot_iv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

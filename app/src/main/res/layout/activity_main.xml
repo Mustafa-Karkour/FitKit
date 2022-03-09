@@ -48,13 +48,14 @@
 
         <Button
             android:id="@+id/button_01"
-            android:onClick="toShoeActivity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:onClick="toShoeActivity"
             android:text="Shoe Try on"
             android:textAlignment="viewStart"
             android:textColor="@android:color/white"

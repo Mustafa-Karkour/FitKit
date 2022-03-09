@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#464D83"
     tools:context=".ProductDisplay">
 
     <ImageView
@@ -11,11 +12,11 @@
         android:layout_width="226dp"
         android:layout_height="279dp"
         android:layout_marginTop="56dp"
+        android:src="@drawable/gym_trainer_pic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/gym_trainer_pic" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/productName"
@@ -24,6 +25,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="32dp"
         android:text="Gym Trainer"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -34,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:text="$100.00"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/productName"
         app:layout_constraintTop_toTopOf="@+id/productName" />
@@ -44,6 +47,7 @@
         android:layout_height="86dp"
         android:layout_marginTop="32dp"
         android:text="A cool gym trainer."
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
