@@ -3,8 +3,7 @@ package com.example.fitkit
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.*
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_shoe.*
 
 class ShoeActivity : AppCompatActivity(), ShoeAdapter.onShoeItemClickListener {
@@ -19,9 +18,9 @@ class ShoeActivity : AppCompatActivity(), ShoeAdapter.onShoeItemClickListener {
 
 
         //Hard-coded values
-        val item = ShoeModel(R.drawable.nike,
+        val item = ShoeModel(R.drawable.nike_logo,
             "https://tryon.kivisense.com/viewer?user=908d701015d3&sku=5&action=view&lang=en-US&token=") //selected by default
-        val item2 = ShoeModel(R.drawable.nike,
+        val item2 = ShoeModel(R.drawable.nike_logo,
             "https://tryon.kivisense.com/viewer?user=908d701015d3&sku=1&action=view&lang=en-US&token=")
 
         list.add(item)
@@ -37,8 +36,8 @@ class ShoeActivity : AppCompatActivity(), ShoeAdapter.onShoeItemClickListener {
 
 
         shoes_RV.adapter = ShoeAdapter(list,this)
-//        shoes_RV.layoutManager = GridLayoutManager(this,2)
-        shoes_RV.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL,false)
+        shoes_RV.layoutManager = GridLayoutManager(this,2)
+//        shoes_RV.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL,false)
 
         shoes_RV.setHasFixedSize(true) //for optimization purposes
 
