@@ -51,6 +51,7 @@ def preprocess_foot(img):
 
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
     #better foot edges image (optimization)
+    #perform dilation on the inverted image since ROI was not highlighted
     img_dil = cv2.dilate(cv2.bitwise_not(img_thr),kernel,iterations=4)
     return img_dil
 
@@ -66,7 +67,7 @@ def footDetection(img_dil,img):
             max_area = cv2.contourArea(c)
             big_con = c
 
-    #obtaining the corners/pts of the detected foot (rectangle)
+    #obtaining the corners/pts/coordinates of the detected foot "contour with max area" (rectangle)
     x,y,w,h = cv2.boundingRect(big_con)
     cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),5) #draw the detected rectangle
     cv2.circle(img,(x+w,y+h),2,(255,0,0),12) # bottom left point

@@ -5,6 +5,8 @@
     android:padding="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="60dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
     android:elevation="12dp"
     app:cardBackgroundColor="@android:color/transparent"
     android:layout_margin="4dp"

@@ -20,7 +20,7 @@ import java.io.*
 import java.util.*
 
 class FootActivity : AppCompatActivity() {
-    //modified shoe size table, taken from https://www.candefashions.com/about/shoe-size-conversion-chart/
+    //Shoe size table
     val footToEUShoeSize = mapOf("23" to "39","24" to "39","25" to "41","26" to "42",
         "27" to "43-44","28" to "44-45","29" to "46-47","30" to "47-48",
         "31" to "48-49")
