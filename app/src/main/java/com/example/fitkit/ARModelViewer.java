@@ -20,6 +20,7 @@ import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.ArSceneView;
 import com.google.ar.sceneform.SceneView;
 import com.google.ar.sceneform.Sceneform;
+import com.google.ar.sceneform.rendering.CameraStream;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.ux.ArFragment;
@@ -70,6 +71,7 @@ public class ARModelViewer extends AppCompatActivity implements
         if (session.isDepthModeSupported(Config.DepthMode.AUTOMATIC)) {
             config.setDepthMode(Config.DepthMode.AUTOMATIC);
         }
+        config.setUpdateMode(Config.UpdateMode.LATEST_CAMERA_IMAGE);
     }
 
     @Override
@@ -78,6 +80,10 @@ public class ARModelViewer extends AppCompatActivity implements
 
         // Fine adjust the maximum frame rate
         arSceneView.setFrameRateFactor(SceneView.FrameRate.FULL);
+
+        // Available modes: DEPTH_OCCLUSION_DISABLED, DEPTH_OCCLUSION_ENABLED
+        arSceneView.getCameraStream()
+                .setDepthOcclusionMode(CameraStream.DepthOcclusionMode.DEPTH_OCCLUSION_ENABLED);
     }
 
     public void loadModels() {
