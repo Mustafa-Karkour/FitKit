@@ -22,4 +22,9 @@ public class ProductDisplay extends AppCompatActivity {
             }
         });
     }
+
+    public void toMeasureActivity(View v){
+        startActivity(new Intent(getApplicationContext(), MeasureActivity.class));
+    }
+
 }
