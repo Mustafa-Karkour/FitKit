@@ -1,24 +1,30 @@
 package com.example.fitkit
 
+import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.ar.core.Anchor
+import com.google.ar.core.Config
+import com.google.ar.core.Session
 import com.google.ar.sceneform.AnchorNode
+import com.google.ar.sceneform.ArSceneView
 import com.google.ar.sceneform.Node
+import com.google.ar.sceneform.SceneView
 import com.google.ar.sceneform.math.Quaternion
 import com.google.ar.sceneform.math.Vector3
-import com.google.ar.sceneform.rendering.MaterialFactory
-import com.google.ar.sceneform.rendering.ShapeFactory
-import com.google.ar.sceneform.rendering.ViewRenderable
+import com.google.ar.sceneform.rendering.*
+import com.google.ar.sceneform.ux.TransformableNode
 import kotlinx.android.synthetic.main.activity_measure.*
+import java.lang.ref.WeakReference
 
 /**
- *Disclaimer: This classes are taken from https://github.com/Terran-Marine/ARCoreMeasuredDistance,
- * but are modified by us to fit our needs
+ *Disclaimer: These classes are taken from https://github.com/Terran-Marine/ARCoreMeasuredDistance,
+ * but are modified by us to fit our needs :)
  */
 
 class MeasureActivity : AppCompatActivity() {
@@ -29,6 +35,14 @@ class MeasureActivity : AppCompatActivity() {
     private val endNodeArray = arrayListOf<Node>()
 
     private lateinit var startNode : AnchorNode
+    private var esti_area : Double = 0.0
+    private var countTap = 0
+
+    private var model: Renderable? = null
+    private var modelSize : Double = 1000.0 //cm^2
+    private lateinit var anchorNode3DObject : AnchorNode
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +50,9 @@ class MeasureActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_measure)
+
+        displayMsg("Please place 4 points to perform room measurement")
+        loadModels()
         initView()
     }
 
@@ -47,9 +64,11 @@ class MeasureActivity : AppCompatActivity() {
             when(dataArray.size){
 
                 0 -> {
+                    countTap = 0
                     Toast.makeText(this,"no operation record", Toast.LENGTH_LONG)
                 }
                 1 -> {
+                    countTap--
                     dataArray.clear()
                     lineNodeArray.clear()
                     sphereNodeArray.clear()
@@ -58,12 +77,25 @@ class MeasureActivity : AppCompatActivity() {
                     (UI_ArSceneView as MyArFragment).arSceneView.scene.removeChild(startNode)
                 }
                 else -> {
-                    dataArray.removeAt(dataArray.size - 1)
-                    val index = startNodeArray.size - 1
-                    startNodeArray[index].removeChild(lineNodeArray.removeAt(index))
-                    endNodeArray[index].removeChild(sphereNodeArray.removeAt(index + 1))
-                    (UI_ArSceneView as MyArFragment).arSceneView.scene.removeChild(startNodeArray.removeAt(index))
-                    (UI_ArSceneView as MyArFragment).arSceneView.scene.removeChild(endNodeArray.removeAt(index))
+                    if(countTap == 6){
+                        countTap--
+                        (UI_ArSceneView as MyArFragment).arSceneView.scene.removeChild(anchorNode3DObject)
+
+                    }else {
+                        countTap--
+                        dataArray.removeAt(dataArray.size - 1)
+                        val index = startNodeArray.size - 1
+                        startNodeArray[index].removeChild(lineNodeArray.removeAt(index))
+                        endNodeArray[index].removeChild(sphereNodeArray.removeAt(index + 1))
+                        (UI_ArSceneView as MyArFragment).arSceneView.scene.removeChild(
+                            startNodeArray.removeAt(index)
+                        )
+                        (UI_ArSceneView as MyArFragment).arSceneView.scene.removeChild(
+                            endNodeArray.removeAt(
+                                index
+                            )
+                        )
+                    }
                 }
 
             }
@@ -73,9 +105,24 @@ class MeasureActivity : AppCompatActivity() {
 
     }
 
-    private fun initAr(){
+    private fun displayMsg(msg:String){
+        Toast.makeText(this,msg,Toast.LENGTH_LONG).show()
+    }
+
+    private fun initAr() {
 
         (UI_ArSceneView as MyArFragment).setOnTapArPlaneListener { hitResult, plane, motionEvent ->
+            countTap++
+//            Log.d("count", "" + countTap)
+            if(countTap < 4)
+                Toast.makeText(this,"${(4-countTap)} point(s) left",Toast.LENGTH_SHORT).show()
+            if(countTap == 4)
+                displayMsg("tap anywhere on the screen to finish the measurement")
+            if(countTap == 5)
+                displayMsg("tap again to show the 3d object")
+
+            if (countTap < 6) {
+
 
             if (dataArray.size == 4) {
                 val endAnchor = dataArray[dataArray.size - 1].anchor
@@ -98,17 +145,15 @@ class MeasureActivity : AppCompatActivity() {
                 val avg_length = (edge1L + edge3L) / 2
                 val avg_width = (edge2W + edge4W) / 2
 
-                var esti_area = avg_length * avg_width //A = wl
+                esti_area = avg_length * avg_width //A = wl
 //                  esti_area_tv.text = "${String.format("%.1f", esti_area * 100)}CM^2"
-                esti_area_tv.text = "Estimated Area: ${String.format("%.1f",esti_area)} cm^2"
+                esti_area_tv.text = "Estimated Area: ${String.format("%.1f", esti_area)} cm^2"
 
                 drawLine(startAnchor, endAnchor, anchorInfoBean.length)
 
 
-
-
             }
-            if(dataArray.size >3){
+            if (dataArray.size > 3) {
                 return@setOnTapArPlaneListener
             }
 
@@ -147,7 +192,66 @@ class MeasureActivity : AppCompatActivity() {
                     }
             }
         }
+            else if(countTap == 6) {
+                if (modelSize > esti_area) {
+                    displayMsg("The 3d object doesn't fit in the given shape")
+                    countTap--
+                } else {
+                    if (model == null) {
+                        Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show()
+                        return@setOnTapArPlaneListener
+                    }
 
+                    // Create the Anchor.
+                    val anchor = hitResult.createAnchor()
+                    anchorNode3DObject = AnchorNode(anchor)
+                    anchorNode3DObject.parent =
+                        (UI_ArSceneView as MyArFragment).getArSceneView().getScene()
+                    // Fix size of model:
+                    //anchorNode.setLocalScale(new Vector3(0.5f, 0.5f, 0.5f));
+
+                    // Create the transformable model and add it to the anchor.
+                    // Fix size of model:
+                    //anchorNode.setLocalScale(new Vector3(0.5f, 0.5f, 0.5f));
+
+                    // Create the transformable model and add it to the anchor.
+                    val model =
+                        TransformableNode((UI_ArSceneView as MyArFragment).getTransformationSystem())
+                    model.parent = anchorNode3DObject
+                    model.setRenderable(this.model)
+                        .animate(true).start()
+
+                    model.select()
+
+                }
+            }
+    }
+
+    }
+
+    fun loadModels() {
+        //String modelLink = getModelLink();
+        val weakActivity = WeakReference<MeasureActivity>(this)
+        ModelRenderable.builder()
+            .setSource(
+                this,
+                Uri.parse("https://firebasestorage.googleapis.com/v0/b/fitkit-5715f.appspot.com/o/Catalog%2FEquipment%2Fe002%2FModel%2Fgym_trainer.glb?alt=media&token=8cc70311-861a-4464-a1b7-163ce328b6fd")
+            )
+            .setIsFilamentGltf(true)
+            .setAsyncLoadEnabled(true)
+            .build()
+            .thenAccept { model: ModelRenderable? ->
+                var activity = weakActivity.get()
+                if (activity != null) {
+                    activity.model = model
+                }
+            }
+            .exceptionally { throwable: Throwable? ->
+                Toast.makeText(
+                    this, "Unable to load model", Toast.LENGTH_LONG
+                ).show()
+                null
+            }
     }
 
     private fun drawLine(firstAnchor: Anchor, secondAnchor: Anchor, length: Double) {
