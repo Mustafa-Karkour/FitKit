@@ -89,7 +89,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
-            android:text="contact_us"
+            android:text="contact us"
             android:textAlignment="viewStart"
             android:textColor="@android:color/white"
             android:textSize="14sp"

@@ -29,7 +29,6 @@ class FootActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_foot)
 
-
     }
 
     val getImgCam = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){

@@ -1,5 +1,6 @@
 package com.example.fitkit
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.*
@@ -13,7 +14,7 @@ class ShoeActivity : AppCompatActivity(), ShoeAdapter.onShoeItemClickListener {
         setContentView(R.layout.activity_shoe)
 //        supportActionBar?.hide()
 
-//        kivi_WebView.webViewClient = WebViewClient()
+        kivi_WebView.webViewClient = WebViewClient()
         kivi_WebView.settings.javaScriptEnabled = true
 
 
@@ -44,17 +45,11 @@ class ShoeActivity : AppCompatActivity(), ShoeAdapter.onShoeItemClickListener {
     }
 
     override fun onShoeClick(shoePosition: Int) {
-        kivi_WebView.loadUrl(list.get(shoePosition).kiviLink)
-//        val clickedItem = list.get(shoePosition)
-//        if(isSelected){
-//            isSelected = !isSelected
-//
-//            clickedItem.BD = BD_BLACK
-//        }else{
-//            clickedItem.BD = BD_TRANS
-//        }
-//
-//        shoes_RV.adapter?.notifyItemChanged(shoePosition)
+//        kivi_WebView.loadUrl(list.get(shoePosition).kiviLink)
+        val intent = Intent(this,ShoeWebActivity::class.java)
+        intent.putExtra("shoe try-on",list.get(shoePosition).kiviLink)
+        startActivity(intent)
+
 
     }
 }

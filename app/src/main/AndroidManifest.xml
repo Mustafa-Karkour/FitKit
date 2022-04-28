@@ -23,7 +23,8 @@
         android:roundIcon="@mipmap/ic_fitkit_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FitKit">
-        <activity android:name=".MeasureActivity"></activity>
+        <activity android:name=".ShoeWebActivity"></activity>
+        <activity android:name=".MeasureActivity" />
         <!--
          Indicates that this app requires Google Play Services for AR ("AR Required") and causes
         the Google Play Store to download and install Google Play Services for AR along with the app.
@@ -47,7 +48,7 @@
         <activity android:name=".ShoeActivity" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ARModelViewer"
             android:exported="false" />
