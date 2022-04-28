@@ -16,7 +16,8 @@ android {
         versionCode 1
         versionName "1.0"
         ndk {
-            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+//            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+            abiFilters "x86", "x86_64"
         }
         python {
             pip{
@@ -49,16 +50,21 @@ android {
 }
 
 dependencies {
-    // Random change
-    // Import the BoM for the Firebase platform
+    // BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:29.1.0')
 
-    // Declare the dependency for the Firebase Storage library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
+    // Dependency for the Firebase Storage library
     implementation 'com.google.firebase:firebase-storage'
+
+    // Dependency for the Realtime Database library
+    implementation 'com.google.firebase:firebase-database'
 
     // Sceneform
     implementation "com.gorisse.thomas.sceneform:sceneform:1.20.4"
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.7.0'
