@@ -12,6 +12,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.activity_shoe.*
+import kotlin.random.Random
 
 class ShoeActivity : AppCompatActivity(), ShoeAdapter.onShoeItemClickListener {
     val list = ArrayList<ShoeModel>()
@@ -25,6 +26,8 @@ class ShoeActivity : AppCompatActivity(), ShoeAdapter.onShoeItemClickListener {
 
         //Shoe Fetch Data from FireStore/////////////////////////////////////
         fetchShoeData()
+//        shoes_RV.adapter?.notifyDataSetChanged()
+
 
 
 
@@ -64,6 +67,7 @@ class ShoeActivity : AppCompatActivity(), ShoeAdapter.onShoeItemClickListener {
     }
 
     fun fetchShoeData(){
+        var counter = 0
         val db = Firebase.firestore
         db.collection("sport_shoes").get().addOnSuccessListener { result ->
             for(doc in result){
@@ -79,35 +83,44 @@ class ShoeActivity : AppCompatActivity(), ShoeAdapter.onShoeItemClickListener {
 
                                 //for filtering ONLY shoe icon images
                                 var prefix = item.name.substring(0,item.name.indexOf(" "))
-                                Log.d("item",prefix)
+//                                Log.d("item",prefix)
                                 if(prefix.equals("icon")){
                                     shoeItem.shoeIconImg_URL = url.toString()
+                                    counter++
 
                                 }else{
                                     shoeItem.img_URL = url.toString()
+                                    counter++
                                 }
                                 //////////////////////////////////////
 
 
 
 //                                Log.d("url",url.toString())
+                                if(counter == 2){
+                                    list.add(shoeItem)
+                                    counter = 0
 
-                                list.add(shoeItem)
+                                }
+
 
                                 ///////////////////For Testing Purposes Only////////////////////////
-                                var i=0
-                                while(i < 10){
-                                    list.add(list.get(0))
-                                    i++
+                                if(list.size == 2){
+                                    var i=0
+                                    while(i < 10){
+                                        list.add(list.get(Random.nextInt(0,3)))
+                                        i++
+                                    }
+                                    Log.d("list",list.size.toString())
+                                    shoes_RV.adapter?.notifyDataSetChanged()
                                 }
-                                Log.d("list",list.size.toString())
                                 ////////////////////////////////////////////////////////////////////
 
                                 shoes_RV.adapter = ShoeAdapter(list,this,this)
                                 shoes_RV.layoutManager = GridLayoutManager(this,2)
-                                //shoes_RV.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL,false)
-
-//                                shoes_RV.setHasFixedSize(true) //for optimization purposes
+//                                //shoes_RV.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL,false)
+//
+////                                shoes_RV.setHasFixedSize(true) //for optimization purposes
 
 
                             }
@@ -116,6 +129,7 @@ class ShoeActivity : AppCompatActivity(), ShoeAdapter.onShoeItemClickListener {
                     .addOnFailureListener { exce ->
                         Log.w("Storage", "Error in fetching the shoe images: "+exce.message,exce)
                     }
+
 
 
 
