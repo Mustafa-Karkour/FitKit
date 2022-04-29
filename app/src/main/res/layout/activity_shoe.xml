@@ -7,31 +7,30 @@
     android:background="#464D83"
     tools:context=".ShoeActivity">
 
-    <WebView
-        android:id="@+id/kivi_WebView"
+    <Button
+        android:id="@+id/shoe_size_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:onClick="toFootMeasurement"
+        android:text="Find My Shoe Size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shoes_RV"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:background="#464D83"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.021" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/shoes_RV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:background="#464D83"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/kivi_WebView"
         tools:listitem="@layout/shoe_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

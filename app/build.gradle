@@ -16,8 +16,8 @@ android {
         versionCode 1
         versionName "1.0"
         ndk {
-//            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
-            abiFilters "x86", "x86_64"
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+//            abiFilters "x86", "x86_64"
         }
         python {
             pip{
@@ -54,10 +54,13 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.1.0')
 
     // Dependency for the Firebase Storage library
-    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
     // Dependency for the Realtime Database library
     implementation 'com.google.firebase:firebase-database'
+
+    // Dependency for the Firestore Database library
+    implementation 'com.google.firebase:firebase-firestore-ktx'
 
     // Sceneform
     implementation "com.gorisse.thomas.sceneform:sceneform:1.20.4"
