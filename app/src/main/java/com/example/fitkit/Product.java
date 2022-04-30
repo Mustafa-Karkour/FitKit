@@ -1,13 +1,30 @@
 package com.example.fitkit;
 
-// Model class to retrieve product information from Firebase Realtime Database
+import java.util.HashMap;
+
+// Model class to retrieve product information from Firebase Firestore
 public class Product {
 
     private String name;
     private String desc;
     private float price;
     private String model;
-    private String img1;
+    private HashMap<String, String> img_links;
+
+    public Product() {
+    }
+
+    public Product(String name, String desc, float price, String model, HashMap<String, String> img_links) {
+        this.name = name;
+        this.desc = desc;
+        this.price = price;
+        this.model = model;
+        this.img_links = img_links;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -37,12 +54,13 @@ public class Product {
         this.model = model;
     }
 
-    public String getImg1() { return img1; }
-
-    public String getName() {
-        return name;
+    public HashMap<String, String> getImg_links() {
+        return img_links;
     }
 
+    public void setImg_links(HashMap<String, String> img_links) {
+        this.img_links = img_links;
+    }
 //    private String[] img_links;
 //
 //    public String getImage(int i) {
