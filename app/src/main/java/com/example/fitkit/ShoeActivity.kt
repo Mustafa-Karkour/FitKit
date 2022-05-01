@@ -108,7 +108,7 @@ class ShoeActivity : AppCompatActivity(), ShoeAdapter.onShoeItemClickListener {
                                 if(list.size == 2){
                                     var i=0
                                     while(i < 10){
-                                        list.add(list.get(Random.nextInt(0,3)))
+                                        list.add(list.get(Random.nextInt(0,2)))
                                         i++
                                     }
                                     Log.d("list",list.size.toString())

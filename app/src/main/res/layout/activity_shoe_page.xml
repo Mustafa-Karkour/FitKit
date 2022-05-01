@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#464D83"
+    android:background="@color/white"
     tools:context=".ShoePageActivity">
 
     <ImageView
@@ -22,29 +22,35 @@
         android:id="@+id/shoe_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
-        android:text="Yeezy 500 Blush"
-        android:textColor="@color/white"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/quicksand_bold"
+        android:text="Grand court shoes"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/shoe_price_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shoe_img" />
 
     <TextView
         android:id="@+id/shoe_price_tv"
-        android:textColor="@color/white"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="32dp"
         android:text="90 KD"
+        android:textColor="@color/fitkitPurple"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shoe_img" />
 
     <TextView
         android:id="@+id/shoe_desc_tv"
-        android:textColor="@color/white"
-
+        android:textColor="#404040"
+        android:fontFamily="@font/quicksand_bold"
         android:layout_width="350dp"
         android:layout_height="200dp"
         android:layout_marginTop="32dp"
@@ -55,22 +61,28 @@
 
     <Button
         android:id="@+id/shoe_tryon_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="165dp"
+        android:layout_height="74dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="65dp"
+        android:backgroundTint="@color/fitkitPurple"
+        android:fontFamily="@font/quicksand_bold"
         android:onClick="toTryItOn"
         android:text="Try it on in AR"
+        app:cornerRadius="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shoe_desc_tv" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
+        android:layout_width="169dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="65dp"
         android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/fitkitPurple"
+        android:fontFamily="@font/quicksand_bold"
         android:text="Add to Cart"
+        app:cornerRadius="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shoe_desc_tv" />
 </androidx.constraintlayout.widget.ConstraintLayout>

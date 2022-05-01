@@ -9,11 +9,14 @@
 
     <Button
         android:id="@+id/shoe_size_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="185dp"
+        android:layout_height="75dp"
         android:layout_marginBottom="32dp"
         android:onClick="toFootMeasurement"
         android:text="Find My Shoe Size"
+        app:cornerRadius="25dp"
+        android:backgroundTint="@color/fitkitPurple"
+        android:fontFamily="@font/quicksand_bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -34,22 +34,26 @@
 
     <Button
         android:id="@+id/btn_gallery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="55dp"
         android:layout_marginTop="32dp"
         android:onClick="pickImageGallery"
         android:text="Gallery"
+        android:fontFamily="@font/quicksand_bold"
+        app:cornerRadius="25dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <Button
         android:id="@+id/btn_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="55dp"
         android:layout_marginTop="32dp"
         android:onClick="pickImageCamera"
         android:text="Camera"
+        android:fontFamily="@font/quicksand_bold"
+        app:cornerRadius="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
@@ -60,6 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Foot Length"
+        android:fontFamily="@font/quicksand_bold"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Recommended Shoe"
+        android:fontFamily="@font/quicksand_bold"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/foot_iv"
         app:layout_constraintEnd_toEndOf="parent"
