@@ -68,7 +68,7 @@ public class ProductDisplay extends AppCompatActivity {
                 TextView pPrice = findViewById(R.id.price);
                 TextView pDesc = findViewById(R.id.description);
                 pName.setText(product.getName());
-                pPrice.setText(String.format("$ %.2f", product.getPrice()));
+                pPrice.setText(String.format("%.2f KD", product.getPrice()));
                 pDesc.setText(product.getDesc());
 
                 // Use image url and display the product image using Glide
