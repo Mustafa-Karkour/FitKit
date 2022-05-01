@@ -8,16 +8,18 @@ public class Product {
     private String name;
     private String desc;
     private float price;
+    private float area;
     private String model;
     private HashMap<String, String> img_links;
 
     public Product() {
     }
 
-    public Product(String name, String desc, float price, String model, HashMap<String, String> img_links) {
+    public Product(String name, String desc, float price, float area, String model, HashMap<String, String> img_links) {
         this.name = name;
         this.desc = desc;
         this.price = price;
+        this.area = area;
         this.model = model;
         this.img_links = img_links;
     }
@@ -44,6 +46,14 @@ public class Product {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public float getArea() {
+        return area;
+    }
+
+    public void setArea(float area) {
+        this.area = area;
     }
 
     public String getModel() {

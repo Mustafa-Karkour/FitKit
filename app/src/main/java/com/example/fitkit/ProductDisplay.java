@@ -32,6 +32,7 @@ public class ProductDisplay extends AppCompatActivity {
     FirebaseFirestore db;
     String productID;
     String modelLink;
+    Float area;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,8 @@ public class ProductDisplay extends AppCompatActivity {
                 Log.d(TAG, "Name: " + product.getName());
                 Log.d(TAG, "Desc: " + product.getDesc());
                 Log.d(TAG, "Price: " + product.getPrice());
+                Log.d(TAG, "Area: " + product.getArea());
+                Log.d(TAG, "Model Link: " + product.getModel());
                 HashMap<String, String> hm = product.getImg_links();
                 for(String i: hm.keySet()) {
                     Log.d(TAG, "Img Link: " + hm.get(i));
@@ -76,18 +79,24 @@ public class ProductDisplay extends AppCompatActivity {
 
                 // Save link to 3D model in a variable
                 modelLink = product.getModel();
+
+                // Save area of model in a variable
+                area = product.getArea();
             }
         });
     }
 
     public void toARModelViewer(View v) {
-        Intent intent = new Intent(getApplicationContext(), ARModelViewer.class);
-        intent.putExtra("modelLink", modelLink);
-        startActivity(intent);
+        Intent intentToView = new Intent(getApplicationContext(), ARModelViewer.class);
+        intentToView.putExtra("modelLink", modelLink);
+        startActivity(intentToView);
     }
 
     public void toMeasureActivity(View v){
-        startActivity(new Intent(getApplicationContext(), MeasureActivity.class));
+        Intent intentToMeasure = new Intent(getApplicationContext(), MeasureActivity.class);
+        intentToMeasure.putExtra("modelLink", modelLink);
+        intentToMeasure.putExtra("area", area);
+        startActivity(intentToMeasure);
     }
 
 }

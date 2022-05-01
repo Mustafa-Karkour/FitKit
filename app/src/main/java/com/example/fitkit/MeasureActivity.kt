@@ -3,6 +3,7 @@ package com.example.fitkit
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
@@ -45,8 +46,14 @@ class MeasureActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_measure)
-
-
+        
+        // Retrieve link to 3D model from product display page
+        modelLink = intent.getStringExtra("modelLink")
+        Log.d("AR_MEASURE", "Link: " + modelLink)
+        
+        // Retrieve estimated area of model from product display page
+        modelSize = intent.getDoubleExtra("area", 0.0)
+        Log.d("AR_MEASURE", "Model Size: " + modelSize)
 
         displayMsg("Please place 4 points to perform room measurement")
         loadModels()
@@ -114,9 +121,9 @@ class MeasureActivity : AppCompatActivity() {
             if(countTap < 4)
                 Toast.makeText(this,"${(4-countTap)} point(s) left",Toast.LENGTH_SHORT).show()
             if(countTap == 4)
-                displayMsg("tap anywhere on the screen to finish the measurement")
+                displayMsg("Tap anywhere on the screen to finish the measurement")
             if(countTap == 5)
-                displayMsg("tap again to show the 3d object")
+                displayMsg("Tap again to show the 3d object")
 
             if (countTap < 6) {
 
@@ -227,9 +234,6 @@ class MeasureActivity : AppCompatActivity() {
     }
 
     fun loadModels() {
-        // Retrieve link to 3D model from product display page
-        modelLink = intent.getStringExtra("modelLink")
-
         val weakActivity = WeakReference<MeasureActivity>(this)
         ModelRenderable.builder()
             .setSource(
