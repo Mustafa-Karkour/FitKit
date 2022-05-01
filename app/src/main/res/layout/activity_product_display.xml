@@ -68,7 +68,7 @@
         android:layout_width="276dp"
         android:layout_height="91dp"
         android:layout_marginTop="32dp"
-        android:fontFamily="@font/quicksand_variablefont_wght"
+        android:fontFamily="@font/quicksand_bold"
         android:text=""
         android:textColor="#404040"
         android:textSize="20sp"
