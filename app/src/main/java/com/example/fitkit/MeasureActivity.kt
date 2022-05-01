@@ -3,18 +3,13 @@ package com.example.fitkit
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.ar.core.Anchor
-import com.google.ar.core.Config
-import com.google.ar.core.Session
 import com.google.ar.sceneform.AnchorNode
-import com.google.ar.sceneform.ArSceneView
 import com.google.ar.sceneform.Node
-import com.google.ar.sceneform.SceneView
 import com.google.ar.sceneform.math.Quaternion
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.*
@@ -42,7 +37,7 @@ class MeasureActivity : AppCompatActivity() {
     private var modelSize : Double = 1000.0 //cm^2
     private lateinit var anchorNode3DObject : AnchorNode
 
-
+    private var modelLink: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +45,8 @@ class MeasureActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_measure)
+
+
 
         displayMsg("Please place 4 points to perform room measurement")
         loadModels()
@@ -230,12 +227,14 @@ class MeasureActivity : AppCompatActivity() {
     }
 
     fun loadModels() {
-        //String modelLink = getModelLink();
+        // Retrieve link to 3D model from product display page
+        modelLink = intent.getStringExtra("modelLink")
+
         val weakActivity = WeakReference<MeasureActivity>(this)
         ModelRenderable.builder()
             .setSource(
                 this,
-                Uri.parse("https://firebasestorage.googleapis.com/v0/b/fitkit-5715f.appspot.com/o/Catalog%2FEquipment%2Fe002%2FModel%2Fgym_trainer.glb?alt=media&token=8cc70311-861a-4464-a1b7-163ce328b6fd")
+                Uri.parse(modelLink)
             )
             .setIsFilamentGltf(true)
             .setAsyncLoadEnabled(true)

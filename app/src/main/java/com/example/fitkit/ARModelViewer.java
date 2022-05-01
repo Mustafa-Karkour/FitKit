@@ -37,11 +37,14 @@ public class ARModelViewer extends AppCompatActivity implements
 
     private ArFragment arFragment;
     private Renderable model;
+    private String modelLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ar_model_viewer);
+
+        modelLink = getIntent().getStringExtra("modelLink");
 
         getSupportFragmentManager().addFragmentOnAttachListener(this);
 
@@ -91,7 +94,7 @@ public class ARModelViewer extends AppCompatActivity implements
 
         WeakReference<ARModelViewer> weakActivity = new WeakReference<>(this);
         ModelRenderable.builder()
-                .setSource(this, Uri.parse("https://firebasestorage.googleapis.com/v0/b/fitkit-5715f.appspot.com/o/Catalog%2FEquipment%2Fe002%2FModel%2Fgym_trainer.glb?alt=media&token=8cc70311-861a-4464-a1b7-163ce328b6fd"))
+                .setSource(this, Uri.parse(modelLink))
                 .setIsFilamentGltf(true)
                 .setAsyncLoadEnabled(true)
                 .build()
@@ -132,12 +135,6 @@ public class ARModelViewer extends AppCompatActivity implements
 //        Log.d("Test", Arrays.toString(f));
         model.select();
     }
-
-//    private String getModelLink() {
-//        FirebaseStorage storage = FirebaseStorage.getInstance();
-//        StorageReference gsReference = storage.getReferenceFromUrl("gs://bucket/images/stars.jpg");
-//
-//    }
 
     @Override
     protected void onDestroy() {
