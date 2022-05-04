@@ -105,6 +105,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:onClick="toGuideActivity"
             android:text="GuideLines"
             android:textAlignment="viewStart"
             android:textColor="@android:color/white"

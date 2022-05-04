@@ -26,4 +26,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun toGuideActivity(v: View){
+        val intent = Intent(this,GuidelinesActivity::class.java)
+        startActivity(intent)
+
+    }
+
 }
