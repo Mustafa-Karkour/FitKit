@@ -4,10 +4,10 @@
     android:orientation="horizontal"
     android:padding="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="60dp"
+    app:cardCornerRadius="20dp"
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
-    android:elevation="55dp"
+    app:cardElevation="5dp"
     app:cardBackgroundColor="@android:color/transparent"
     android:layout_margin="4dp"
     android:layout_height="wrap_content">
@@ -35,6 +35,7 @@
             android:fontFamily="@font/quicksand_bold"
             android:textStyle="bold"
             android:textSize="13sp"
+            android:textColor="#000000"
             android:textAlignment="center" />
 
         <TextView
@@ -45,7 +46,7 @@
             android:layout_alignEnd="@+id/shoe_name"
             android:layout_marginTop="125dp"
             android:text="90 KD"
-            android:textColor="@color/fitkitPurple"
+            android:textColor="#2B324C"
             android:textStyle="bold"
             android:textSize="19sp"
             android:paddingBottom="25dp"
