@@ -1,9 +1,10 @@
 package com.example.fitkit;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 // Model class to retrieve product information from Firebase Firestore
-public class Product {
+public class Product implements Serializable {
 
     private String name;
     private String desc;
@@ -70,6 +71,10 @@ public class Product {
 
     public void setImg_links(HashMap<String, String> img_links) {
         this.img_links = img_links;
+    }
+
+    public String toString() {
+        return (name + " " + desc + " " + price + " " + area + " " + model + " " + img_links.toString());
     }
 //    private String[] img_links;
 //

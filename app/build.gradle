@@ -63,6 +63,9 @@ dependencies {
     // Dependency for the Firestore Database library
     implementation 'com.google.firebase:firebase-firestore-ktx'
 
+    // FirebaseUI for Cloud Firestore
+    implementation 'com.firebaseui:firebase-ui-firestore:8.0.1'
+
     // Sceneform
     implementation "com.gorisse.thomas.sceneform:sceneform:1.20.4"
 

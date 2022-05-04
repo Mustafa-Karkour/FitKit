@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun toProductsActivity(view: View){
-        val intent = Intent(this, ProductDisplay::class.java)
+        val intent = Intent(this, ProductListActivity::class.java)
         startActivity(intent)
     }
 

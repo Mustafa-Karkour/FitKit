@@ -23,7 +23,10 @@
         android:roundIcon="@mipmap/ic_fitkit_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FitKit">
-        <activity android:name=".ShoePageActivity"></activity>
+        <activity
+            android:name=".ProductListActivity"
+            android:exported="false" />
+        <activity android:name=".ShoePageActivity" />
         <activity android:name=".ShoeWebActivity" />
         <activity android:name=".MeasureActivity" />
         <!--
