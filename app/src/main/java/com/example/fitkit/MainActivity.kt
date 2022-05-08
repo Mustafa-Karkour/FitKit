@@ -21,15 +21,18 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun toFootActivity(view: View){
-        val intent = Intent(this,FootActivity::class.java)
-        startActivity(intent)
-    }
+//    fun toFootActivity(view: View){
+//        val intent = Intent(this,FootActivity::class.java)
+//        startActivity(intent)
+//    }
 
     fun toGuideActivity(v: View){
         val intent = Intent(this,GuidelinesActivity::class.java)
         startActivity(intent)
-
     }
 
+    fun toContactActivity(v: View){
+        val intent = Intent(this,ContactActivity::class.java)
+        startActivity(intent)
+    }
 }

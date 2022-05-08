@@ -23,7 +23,10 @@
         android:roundIcon="@mipmap/ic_fitkit_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FitKit">
-        <activity android:name=".GuidelinesActivity"></activity>
+        <activity
+            android:name=".ContactActivity"
+            android:exported="false" />
+        <activity android:name=".GuidelinesActivity" />
         <activity
             android:name=".ProductListActivity"
             android:exported="false" />
