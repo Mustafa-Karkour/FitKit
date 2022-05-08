@@ -64,40 +64,7 @@
             app:backgroundTint="@android:color/transparent" />
 
         <Button
-            android:id="@+id/button_02"
-            android:onClick="toFootActivity"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
-            android:text="Foot measurement"
-            android:textAlignment="viewStart"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:backgroundTint="@android:color/transparent" />
-
-        <Button
             android:id="@+id/button_03"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
-            android:text="contact us"
-            android:textAlignment="viewStart"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:backgroundTint="@android:color/transparent" />
-
-        <Button
-            android:id="@+id/button_04"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
@@ -111,6 +78,23 @@
             android:textColor="@android:color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_04"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:onClick="toContactActivity"
+            android:text="contact us"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:backgroundTint="@android:color/transparent" />
     </LinearLayout>
 
 
