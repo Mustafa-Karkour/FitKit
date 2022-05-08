@@ -1,8 +1,5 @@
 package com.example.fitkit
 
-import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.content.ContextCompat
+
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_shoe_page.*
 /**
@@ -53,29 +50,9 @@ class ShoePageActivity : AppCompatActivity() {
         builder.setInstantAppsEnabled(true)
 
         val customBuilder = builder.build()
+        customBuilder.intent.setPackage("com.android.chrome")
+        customBuilder.launchUrl(this, Uri.parse(kivi_link))
 
-        if (this.isPackageInstalled("com.android.chrome")) {
-            // if chrome is available use chrome custom tabs
-            customBuilder.intent.setPackage("com.android.chrome")
-            customBuilder.launchUrl(this, Uri.parse(kivi_link))
-        } else {
-            // if not available
-                val intent = Intent(this,ShoeWebActivity::class.java)
-                intent.putExtra("shoe try on link",kivi_link)
-//              Log.d("kivi",kivi_link.toString())
-                startActivity(intent)
-        }
 
     }
-
-    fun Context.isPackageInstalled(packageName: String): Boolean {
-        // check if chrome is installed or not
-        return try {
-            packageManager.getPackageInfo(packageName, 0)
-            true
-        } catch (e: PackageManager.NameNotFoundException) {
-            false
-        }
-    }
-
 }
