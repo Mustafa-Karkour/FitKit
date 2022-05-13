@@ -108,16 +108,18 @@ class ShoeActivity : AppCompatActivity(), ShoeAdapter.onShoeItemClickListener {
                                 if(list.size == 2){
                                     var i=0
                                     while(i < 10){
-                                        list.add(list.get(Random.nextInt(0,2)))
+                                        list.add(list.get(i % 2))
                                         i++
                                     }
-                                    Log.d("list",list.size.toString())
+//                                    Log.d("list",list.size.toString())
+                                    shoes_RV.adapter = ShoeAdapter(list,this,this)
+                                    shoes_RV.layoutManager = GridLayoutManager(this,2)
                                     shoes_RV.adapter?.notifyDataSetChanged()
                                 }
                                 ////////////////////////////////////////////////////////////////////
 
-                                shoes_RV.adapter = ShoeAdapter(list,this,this)
-                                shoes_RV.layoutManager = GridLayoutManager(this,2)
+//                                shoes_RV.adapter = ShoeAdapter(list,this,this)
+//                                shoes_RV.layoutManager = GridLayoutManager(this,2)
 //                                //shoes_RV.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL,false)
 //
 ////                                shoes_RV.setHasFixedSize(true) //for optimization purposes
