@@ -14,10 +14,13 @@ class ShoeWebActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shoe_web)
 
-//        kivi_web.webChromeClient = WebChromeClient()
-//        kivi_web.webViewClient = WebViewClient()
 
-//        kivi_web.settings.javaScriptEnabled = true
+        kivi_web.webViewClient = WebViewClient()
+//        kivi_web.webChromeClient = WebChromeClient()
+
+        kivi_web.settings.javaScriptEnabled = true
+        kivi_web.settings.pluginState = WebSettings.PluginState.ON
+        kivi_web.settings.setAppCacheEnabled(true)
 //        Log.d("kivi",intent.getStringExtra("shoe try on link").toString())
         kivi_web.loadUrl(intent.getStringExtra("shoe try on link").toString())
 //        kivi_web.settings.pluginState = WebSettings.PluginState.ON

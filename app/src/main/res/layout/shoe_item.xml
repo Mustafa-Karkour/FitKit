@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/shoe_name"
             android:layout_alignEnd="@+id/shoe_name"
-            android:layout_marginTop="125dp"
+            android:layout_marginTop="135dp"
             android:text="90 KD"
             android:textColor="#2B324C"
             android:textStyle="bold"

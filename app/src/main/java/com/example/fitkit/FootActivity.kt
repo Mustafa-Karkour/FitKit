@@ -9,6 +9,7 @@ import android.graphics.Matrix
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
@@ -32,29 +33,42 @@ class FootActivity : AppCompatActivity() {
     }
 
     val getImgCam = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-        var bitmap = it?.data?.extras?.get("data") as Bitmap
-        if(bitmap.height < bitmap.width){
-            //Image is horizontal
-            var matrix = Matrix()
-            matrix.postRotate(90F)
-            bitmap = Bitmap.createBitmap(bitmap,0,0,bitmap.width,bitmap.height,matrix,true)
+        if(it?.data == null){
+            return@registerForActivityResult
+        }else {
 
+
+            var bitmap = it?.data?.extras?.get("data") as Bitmap
+            if (bitmap.height < bitmap.width) {
+                //Image is horizontal
+                var matrix = Matrix()
+                matrix.postRotate(90F)
+                bitmap =
+                    Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+
+            }
+            foot_iv.setImageBitmap(bitmap)
+            if (!Python.isStarted())
+                Python.start(AndroidPlatform(this))
+            var py = Python.getInstance()
+            var pyObj = py.getModule("measure") //python Script name
+
+            val fileAbsPath = getImageAbsPath(bitmap)
+            var obj = pyObj.callAttr("main", fileAbsPath) //(method name, argument input (img_path))
+            var footLength: String = obj.toString() //return value
+            foot_length_tv.text = "Estimated Foot length: " + footLength + " cm"
+            shoe_size_tv.text = "Recommended shoe size: " + footToEUShoeSize[footLength.substring(
+                0,
+                footLength.indexOf(".")
+            )] //rounding the foot length down
         }
-        foot_iv.setImageBitmap(bitmap)
-        if(!Python.isStarted())
-            Python.start(AndroidPlatform(this))
-        var py = Python.getInstance()
-        var pyObj  = py.getModule("measure") //python Script name
-
-        val fileAbsPath = getImageAbsPath(bitmap)
-        var obj = pyObj.callAttr("main",fileAbsPath) //(method name, argument input (img_path))
-        var footLength : String = obj.toString() //return value
-        foot_length_tv.text = "Estimated Foot length: "+footLength + " cm"
-        shoe_size_tv.text = "Recommended shoe size: "+footToEUShoeSize[footLength.substring(0,footLength.indexOf("."))] //rounding the foot length down
     }
 
     val getImgGal = registerForActivityResult(ActivityResultContracts.GetContent(),
         ActivityResultCallback {
+            if(it == null){
+                return@ActivityResultCallback
+            }
             var inputStream = contentResolver.openInputStream(it)
             var bitmap = BitmapFactory.decodeStream(inputStream)
 
@@ -111,5 +125,4 @@ class FootActivity : AppCompatActivity() {
     fun pickImageGallery(view: View){
         getImgGal.launch("image/*")
     }
-
 }
