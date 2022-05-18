@@ -35,7 +35,7 @@ class MeasureActivity : AppCompatActivity() {
     private var countTap = 0
 
     private var model: Renderable? = null
-    private var modelSize : Double = 1000.0 //cm^2
+    private var modelSize : Float = 1000.0F //cm^2
     private lateinit var anchorNode3DObject : AnchorNode
 
     private var modelLink: String? = null
@@ -52,7 +52,7 @@ class MeasureActivity : AppCompatActivity() {
         Log.d("AR_MEASURE", "Link: " + modelLink)
         
         // Retrieve estimated area of model from product display page
-        modelSize = intent.getDoubleExtra("area", 0.0)
+        modelSize = intent.getFloatExtra("area", 0.0F)
         Log.d("AR_MEASURE", "Model Size: " + modelSize)
 
         displayMsg("Please place 4 points to perform room measurement")
