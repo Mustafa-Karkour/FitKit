@@ -36,9 +36,7 @@ public class ContactActivity extends AppCompatActivity {
         String[] TO = {"csis401temp@gmail.com"};
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
 
-//                emailIntent.setType("text/plain");
         emailIntent.setData(Uri.parse("mailto:"));
-//                emailIntent.setDataAndType(Uri.parse("mailto:"), "text/plain");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "FitKit Feedback");
         emailIntent.putExtra(Intent.EXTRA_TEXT, email);
